@@ -1,0 +1,64 @@
+index.html save as
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voter Validation</title>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var nationality = document.getElementById("nationality").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "validate.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.send("name=" + name + "&age=" + age + "&nationality=" + nationality);
+        }
+    </script>
+</head>
+<body>
+
+<h2>Voter Form</h2>
+
+Name: <input type="text" id="name"><br><br>
+Age: <input type="number" id="age"><br><br>
+Nationality: <input type="text" id="nationality"><br><br>
+
+<button onclick="validateForm()">Submit</button>
+
+<p id="result"></p>
+
+</body>
+</html>
+
+
+
+validate.php
+<?php
+$name = $_POST['name'];
+$age = $_POST['age'];
+$nationality = $_POST['nationality'];
+
+// Validation
+if (!preg_match("/^[A-Z ]+$/", $name)) {
+    echo "Name must be in UPPERCASE only";
+}
+else if ($age < 18) {
+    echo "Age must be 18 or above";
+}
+else if (strtolower($nationality) != "indian") {
+    echo "Nationality must be Indian";
+}
+else {
+    echo "Valid Voter Details Submitted Successfully!";
+}
+?>
+
+
