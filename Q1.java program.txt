@@ -1,0 +1,135 @@
+Q1.java program
+
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class CollegeTable {
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame("College Details");
+        frame.setSize(600, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        String[] columnNames = {"CID", "CName", "Address", "Year"};
+        Object[][] data = {
+            {1, "ABC College", "Pune", 2001},
+            {2, "XYZ College", "Mumbai", 1998},
+            {3, "PQR College", "Nashik", 2010},
+            {4, "LMN College", "Nagpur", 2005}
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+        JScrollPane sp = new JScrollPane(table);
+        frame.add(sp);
+
+        frame.setVisible(true);
+    }
+}
+
+
+
+
+
+Q1 
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class CollegeTable {
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame("College Details");
+        String[] columns = {"CID", "CName", "Address", "Year"};
+        String[][] data = {
+                {"101", "ABC College", "Pune", "1990"},
+                {"102", "XYZ College", "Mumbai", "1985"},
+                {"103", "PQR College", "Nashik", "2000"},
+                {"104", "LMN College", "Nagpur", "1995"}
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+
+        JTable table = new JTable(model);
+
+        JScrollPane sp = new JScrollPane(table);
+
+        frame.add(sp);
+
+        frame.setSize(500, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+
+
+Q2
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class SessionServlet extends HttpServlet {
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // Create or get existing session
+        HttpSession session = request.getSession();
+
+        // Set session timeout (in seconds)
+        session.setMaxInactiveInterval(60); // 60 seconds
+
+        out.println("<html><body>");
+        out.println("<h2>Session Timeout Set to 60 Seconds</h2>");
+        out.println("</body></html>");
+    }
+}
+
+Q2
+
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class SessionTimeoutServlet extends HttpServlet {
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // Get or create session
+        HttpSession session = request.getSession(true);
+
+        // Set inactive time interval (in seconds)
+        session.setMaxInactiveInterval(120); // 2 minutes
+
+        out.println("<html><body>");
+        out.println("<h2>Session Created</h2>");
+        out.println("<p>Session ID: " + session.getId() + "</p>");
+        out.println("<p>Inactive Interval set to 120 seconds (2 minutes)</p>");
+        out.println("</body></html>");
+    }
+}
+
+
+
+Q2  if needed xml program 
+<servlet>
+  <servlet-name>SessionTimeoutServlet</servlet-name>
+  <servlet-class>SessionTimeoutServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>SessionTimeoutServlet</servlet-name>
+    <url-pattern>/session</url-pattern>
+</servlet-mapping>
+
+
+
